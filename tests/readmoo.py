@@ -91,3 +91,9 @@ class TestBook(TestCase):
             Book("210305007000101").title,
             "時代如何轉了彎：蔡英文與臺灣轉型八年【附作者之一張惠菁親聲朗讀前言音檔】",
         )
+
+    def test_rating(self) -> None:
+        self.assertEqual(Book("210305007000101").rating, "4.8")
+
+    def test_no_rating(self) -> None:
+        self.assertIsNone(Book("210006079000101").rating)
