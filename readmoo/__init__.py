@@ -8,6 +8,8 @@ class Readmoo(Source):
     author = "Aphronyx So͘"
     version = (0, 0, 0)
 
+    capabilities = frozenset({"cover"})
+
     def get_book_url(self, identifiers):  # pyright: ignore [reportIncompatibleMethodOverride]
         if id := identifiers.get(ID_NAME):
             return (ID_NAME, id, Book(id).url)
