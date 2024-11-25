@@ -1,4 +1,5 @@
 from calibre.ebooks.metadata.sources.base import Source
+from calibre_plugins.readmoo.main import ID_NAME, Book
 
 
 class Readmoo(Source):
@@ -6,3 +7,7 @@ class Readmoo(Source):
     description = "Downloads metadata and covers from Readmoo"
     author = "Aphronyx So͘"
     version = (0, 0, 0)
+
+    def get_book_url(self, identifiers):
+        if id := identifiers.get(ID_NAME):
+            return (ID_NAME, id, Book(id).url)
