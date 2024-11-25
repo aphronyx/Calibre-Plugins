@@ -20,9 +20,12 @@ class Readmoo(Source):
 
         return None
 
-    def get_book_url_name(self, idtype, idval, url):
+    def get_book_url_name(self, idtype, idval, url):  # pyright: ignore [reportIncompatibleMethodOverride]
         if idtype == ID_NAME:
             return self.name
 
         if idtype == "isbn":
             return "ISBN"
+
+        if idtype == "eisbn":
+            return "eISBN"
