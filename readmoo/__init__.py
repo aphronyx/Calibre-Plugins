@@ -32,9 +32,14 @@ class Readmoo(Source):
         if idtype == "eisbn":
             return "eISBN"
 
-    def get_cached_cover_url(self, identifiers):
+    def get_cached_cover_url(self, identifiers):  # pyright: ignore [reportIncompatibleMethodOverride]
         if id := identifiers.get(ID_NAME):
             return Book(id).cover_url
 
         if (isbn := identifiers.get("isbn")) and (books := Book.search(isbn)):
             return books[0].cover_url
+
+        if (eisbn := identifiers.get("eisbn")) and (books := Book.search(eisbn)):
+            return books[0].cover_url
+
+        return None
