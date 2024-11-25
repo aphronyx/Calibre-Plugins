@@ -26,6 +26,7 @@ class Readmoo(Source):
         }
     )
     has_html_comments = True
+    prefer_results_with_isbn = False
 
     def get_book_url(self, identifiers):  # pyright: ignore [reportIncompatibleMethodOverride]
         if id := identifiers.get(ID_NAME):
