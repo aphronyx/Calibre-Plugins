@@ -76,6 +76,18 @@ class Book:
                 f"Failed to scrape cover URL for ID: {self.__id}\n" f"Reason: {e}"
             )
 
+    @property
+    def categories(self) -> list[str]:
+        try:
+            return self.__webpage.xpath(
+                "(//a[@itemprop='item']/span[@itemprop='name'])[position() > 1]/text()"
+            )
+
+        except Exception as e:
+            raise Exception(
+                f"Failed to scrape categories for ID: {self.__id}\n" f"Reason: {e}"
+            )
+
     __DOMAIN: str = "https://readmoo.com"
 
     @classmethod

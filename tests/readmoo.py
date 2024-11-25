@@ -82,3 +82,6 @@ class TestBook(TestCase):
             Book.from_url(url)
 
         self.assertEqual(str(context.exception), f"Invalid book URL: {url}")
+
+    def test_categories(self) -> None:
+        self.assertEqual(Book("210305007000101").tags, ["社會科學", "政治"])
