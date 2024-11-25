@@ -178,6 +178,21 @@ class Book:
                 f"Failed to scrape eISBN for ID: {self.__id}\n" f"Reason: {e}"
             )
 
+    @property
+    def series(self) -> str | None:
+        try:
+            if series := self.__webpage.xpath(
+                "//a[@class='text-link flex-shrink-1']/text()"
+            ):
+                return series[0].rsplit("（", 1)[0].strip()
+
+            return None
+
+        except Exception as e:
+            raise Exception(
+                f"Failed to scrape series for ID: {self.__id}\n" f"Reason: {e}"
+            )
+
     __DOMAIN: str = "https://readmoo.com"
 
     @classmethod
