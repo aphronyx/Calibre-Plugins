@@ -35,3 +35,6 @@ class Readmoo(Source):
     def get_cached_cover_url(self, identifiers):
         if id := identifiers.get(ID_NAME):
             return Book(id).cover_url
+
+        if (isbn := identifiers.get("isbn")) and (books := Book.search(isbn)):
+            return books[0].cover_url
