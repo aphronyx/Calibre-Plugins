@@ -31,3 +31,7 @@ class Readmoo(Source):
 
         if idtype == "eisbn":
             return "eISBN"
+
+    def get_cached_cover_url(self, identifiers):
+        if id := identifiers.get(ID_NAME):
+            return Book(id).cover_url
