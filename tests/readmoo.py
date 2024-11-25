@@ -102,3 +102,6 @@ class TestBook(TestCase):
         self.assertEqual(
             Book("210305007000101").authors, ["張惠菁", "吳錦勳", "李桐豪"]
         )
+
+    def test_publisher(self) -> None:
+        self.assertEqual(Book("210305007000101").publisher, "鏡文學股份有限公司")
