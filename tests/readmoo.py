@@ -63,3 +63,9 @@ class TestBook(TestCase):
 
         self.assertEqual(len(books), 1)
         self.assertEqual(books[0].id, "210305007000101")
+
+    def test_cover_url(self) -> None:
+        self.assertEqual(
+            Book("210305007000101").cover_url,
+            "https://cdn.readmoo.com/cover/pm/rnjkuhi.jpg",
+        )

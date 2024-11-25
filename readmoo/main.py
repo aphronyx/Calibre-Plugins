@@ -24,6 +24,7 @@ class Book:
 
         self.__id = id
         self.__url = url
+        self.__webpage = html.fromstring(res.text)
 
     @classmethod
     def search(cls, keyword: str) -> list[Self]:
@@ -50,6 +51,22 @@ class Book:
     @property
     def url(self) -> str:
         return self.__url
+
+    @property
+    def cover_url(self) -> str:
+        try:
+            return (
+                self.__webpage.xpath("//div[@class='cover-img text-center']/img/@src")[
+                    0
+                ]
+                .rsplit("?", 1)[0]
+                .replace("_460x580", "")
+            )
+
+        except Exception as e:
+            raise Exception(
+                f"Failed to scrape cover URL for ID: {self.__id}\n" f"Reason: {e}"
+            )
 
     __DOMAIN: str = "https://readmoo.com"
 
