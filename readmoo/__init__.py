@@ -9,6 +9,22 @@ class Readmoo(Source):
     version = (0, 0, 0)
 
     capabilities = frozenset({"identify", "cover"})
+    touch_fields = frozenset(
+        {
+            f"identifier:{ID_NAME}",
+            "tags",
+            "title",
+            "rating",
+            "authors",
+            "publisher",
+            "pubdate",
+            "languages",
+            "identifier:isbn",
+            "identifier:eisbn",
+            "series",
+            "comments",
+        }
+    )
 
     def get_book_url(self, identifiers):  # pyright: ignore [reportIncompatibleMethodOverride]
         if id := identifiers.get(ID_NAME):
