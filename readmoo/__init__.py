@@ -25,6 +25,7 @@ class Readmoo(Source):
             "comments",
         }
     )
+    has_html_comments = True
 
     def get_book_url(self, identifiers):  # pyright: ignore [reportIncompatibleMethodOverride]
         if id := identifiers.get(ID_NAME):
