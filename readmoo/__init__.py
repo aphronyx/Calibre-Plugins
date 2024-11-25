@@ -43,3 +43,22 @@ class Readmoo(Source):
             return books[0].cover_url
 
         return None
+
+    def download_cover(
+        self,
+        log,
+        result_queue,
+        abort,
+        title=None,
+        authors=None,
+        identifiers={},
+        timeout=30,
+        get_best_cover=False,
+    ):
+        if cover_url := self.get_cached_cover_url(identifiers):
+            try:
+                self.download_image(cover_url, timeout, log, result_queue)
+                return
+
+            except Exception as e:
+                log.exception(e)
