@@ -108,3 +108,6 @@ class TestBook(TestCase):
 
     def test_publication_date(self) -> None:
         self.assertEqual(Book("210305007000101").publication_date, "2023/12/15")
+
+    def test_language(self) -> None:
+        self.assertEqual(Book("210305007000101").language, "繁體中文")

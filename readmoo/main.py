@@ -142,6 +142,16 @@ class Book:
                 f"Reason: {e}"
             )
 
+    @property
+    def language(self) -> str:
+        try:
+            return self.__webpage.xpath("//span[@itemprop='inLanguage']//text()")[0]
+
+        except Exception as e:
+            raise Exception(
+                f"Failed to scrape language for ID: {self.__id}\n" f"Reason: {e}"
+            )
+
     __DOMAIN: str = "https://readmoo.com"
 
     @classmethod
