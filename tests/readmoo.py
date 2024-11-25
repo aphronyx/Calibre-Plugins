@@ -17,3 +17,8 @@ class TestBook(TestCase):
             Book(id)
 
         self.assertEqual(str(context.exception), f"Invalid ID: {id}")
+
+    def test_url(self) -> None:
+        id = "210305007000101"
+
+        self.assertEqual(Book(id).url, f"https://readmoo.com/book/{id}")
