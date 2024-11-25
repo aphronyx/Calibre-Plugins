@@ -11,3 +11,6 @@ class Readmoo(Source):
     def get_book_url(self, identifiers):
         if id := identifiers.get(ID_NAME):
             return (ID_NAME, id, Book(id).url)
+
+        if (isbn := identifiers.get("isbn")) and (books := Book.search(isbn)):
+            return ("isbn", isbn, books[0].url)
