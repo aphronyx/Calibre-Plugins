@@ -111,3 +111,9 @@ class TestBook(TestCase):
 
     def test_language(self) -> None:
         self.assertEqual(Book("210305007000101").language, "繁體中文")
+
+    def test_isbn(self) -> None:
+        self.assertEqual(Book("210305007000101").isbn, "9786267229903")
+
+    def test_no_isbn(self) -> None:
+        self.assertIsNone(Book("210133088000101").isbn)
