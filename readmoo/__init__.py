@@ -19,3 +19,7 @@ class Readmoo(Source):
             return ("eisbn", eisbn, books[0].url)
 
         return None
+
+    def get_book_url_name(self, idtype, idval, url):
+        if idtype == ID_NAME:
+            return self.name
