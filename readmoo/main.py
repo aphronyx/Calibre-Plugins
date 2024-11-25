@@ -165,6 +165,19 @@ class Book:
                 f"Failed to scrape ISBN for ID: {self.__id}\n" f"Reason: {e}"
             )
 
+    @property
+    def eisbn(self) -> str | None:
+        try:
+            if eisbn := self.__webpage.xpath("//span[@itemprop='eisbn']//text()"):
+                return eisbn[0]
+
+            return None
+
+        except Exception as e:
+            raise Exception(
+                f"Failed to scrape eISBN for ID: {self.__id}\n" f"Reason: {e}"
+            )
+
     __DOMAIN: str = "https://readmoo.com"
 
     @classmethod

@@ -117,3 +117,9 @@ class TestBook(TestCase):
 
     def test_no_isbn(self) -> None:
         self.assertIsNone(Book("210133088000101").isbn)
+
+    def test_eisbn(self) -> None:
+        self.assertEqual(Book("210305007000101").eisbn, "9786267229897")
+
+    def test_no_eisbn(self) -> None:
+        self.assertIsNone(Book("210133088000101").eisbn)
