@@ -44,6 +44,12 @@ class Readmoo(Source):
 
         return None
 
+    def id_from_url(self, url):  # pyright: ignore [reportIncompatibleMethodOverride]
+        try:
+            return (ID_NAME, Book.from_url(url).id)
+        except ValueError:
+            return None
+
     def download_cover(
         self,
         log,
