@@ -111,6 +111,16 @@ class Book:
                 f"Failed to scrape rating for ID: {self.__id}\n" f"Reason: {e}"
             )
 
+    @property
+    def authors(self) -> list[str]:
+        try:
+            return self.__webpage.xpath("//a[@itemprop='name']/text()")
+
+        except Exception as e:
+            raise Exception(
+                f"Failed to scrape authors for ID: {self.__id}\n" f"Reason: {e}"
+            )
+
     __DOMAIN: str = "https://readmoo.com"
 
     @classmethod

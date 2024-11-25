@@ -97,3 +97,8 @@ class TestBook(TestCase):
 
     def test_no_rating(self) -> None:
         self.assertIsNone(Book("210006079000101").rating)
+
+    def test_authors(self) -> None:
+        self.assertEqual(
+            Book("210305007000101").authors, ["張惠菁", "吳錦勳", "李桐豪"]
+        )
