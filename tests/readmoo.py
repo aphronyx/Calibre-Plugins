@@ -69,3 +69,16 @@ class TestBook(TestCase):
             Book("210305007000101").cover_url,
             "https://cdn.readmoo.com/cover/pm/rnjkuhi.jpg",
         )
+
+    def test_valid_url(self) -> None:
+        self.assertIsInstance(
+            Book.from_url("https://readmoo.com/book/210305007000101"), Book
+        )
+
+    def test_invalid_url(self) -> None:
+        url = "invalid"
+
+        with self.assertRaises(ValueError) as context:
+            Book.from_url(url)
+
+        self.assertEqual(str(context.exception), f"Invalid book URL: {url}")

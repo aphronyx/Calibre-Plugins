@@ -1,3 +1,4 @@
+import re
 from operator import itemgetter
 from threading import Thread
 from typing import Self
@@ -43,6 +44,13 @@ class Book:
 
         books = [book for _, book in sorted(results, key=itemgetter(0))]
         return books
+
+    @classmethod
+    def from_url(cls, url: str, timeout=None) -> Self:
+        if m := re.match(rf"{re.escape(cls.__DOMAIN)}/book/(?P<id>\d+)", url):
+            return cls(m["id"], timeout)
+
+        raise ValueError(f"Invalid book URL: {url}")
 
     @property
     def id(self) -> str:
