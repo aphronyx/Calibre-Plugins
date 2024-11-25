@@ -9,9 +9,9 @@ ID_NAME: str = "readmoo"
 
 
 class Book:
-    def __init__(self, id: str) -> None:
+    def __init__(self, id: str, timeout: int | None = None) -> None:
         url = f"{self.__DOMAIN}/book/{id}"
-        res = requests.get(url)
+        res = requests.get(url, timeout=timeout)
         res_status = res.status_code
         if res_status == 404:
             raise ValueError(f"Invalid ID: {id}")
@@ -27,16 +27,16 @@ class Book:
         self.__webpage = html.fromstring(res.text)
 
     @classmethod
-    def search(cls, keyword: str) -> list[Self]:
+    def search(cls, keyword: str, timeout: int | None = None) -> list[Self]:
         url = f"{cls.__DOMAIN}/search/keyword?q={keyword}&page=1&st=true"
-        res = requests.get(url).text
+        res = requests.get(url, timeout=timeout).text
         ids = html.fromstring(res).xpath("//a[@class='product-link']/@data-readmoo-id")
         max = ids_len if (ids_len := len(ids)) < 20 else 20
 
         results = []
         threads = []
         for index, id in enumerate(ids[:max]):
-            thread = Thread(target=cls.__append_to, args=(index, id, results))
+            thread = Thread(target=cls.__append_to, args=(index, id, results, timeout))
             thread.start()
             threads.append(thread)
         [thread.join() for thread in threads]
@@ -71,5 +71,11 @@ class Book:
     __DOMAIN: str = "https://readmoo.com"
 
     @classmethod
-    def __append_to(cls, index: int, id: str, results: list[tuple[int, Self]]) -> None:
-        results.append((index, cls(id)))
+    def __append_to(
+        cls,
+        index: int,
+        id: str,
+        results: list[tuple[int, Self]],
+        timeout: int | None = None,
+    ) -> None:
+        results.append((index, cls(id, timeout)))
