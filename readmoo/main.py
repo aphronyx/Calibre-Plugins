@@ -88,6 +88,16 @@ class Book:
                 f"Failed to scrape categories for ID: {self.__id}\n" f"Reason: {e}"
             )
 
+    @property
+    def title(self) -> str:
+        try:
+            return self.__webpage.xpath("//h1/text()")[0]
+
+        except Exception as e:
+            raise Exception(
+                f"Failed to scrape title for ID: {self.__id}\n" f"Reason: {e}"
+            )
+
     __DOMAIN: str = "https://readmoo.com"
 
     @classmethod

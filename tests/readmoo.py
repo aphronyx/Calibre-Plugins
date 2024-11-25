@@ -85,3 +85,9 @@ class TestBook(TestCase):
 
     def test_categories(self) -> None:
         self.assertEqual(Book("210305007000101").tags, ["社會科學", "政治"])
+
+    def test_title(self) -> None:
+        self.assertEqual(
+            Book("210305007000101").title,
+            "時代如何轉了彎：蔡英文與臺灣轉型八年【附作者之一張惠菁親聲朗讀前言音檔】",
+        )
