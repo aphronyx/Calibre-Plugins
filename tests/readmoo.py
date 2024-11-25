@@ -105,3 +105,6 @@ class TestBook(TestCase):
 
     def test_publisher(self) -> None:
         self.assertEqual(Book("210305007000101").publisher, "鏡文學股份有限公司")
+
+    def test_publication_date(self) -> None:
+        self.assertEqual(Book("210305007000101").publication_date, "2023/12/15")

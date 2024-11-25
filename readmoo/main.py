@@ -131,6 +131,17 @@ class Book:
                 f"Failed to scrape publisher for ID: {self.__id}\n" f"Reason: {e}"
             )
 
+    @property
+    def publication_date(self) -> str:
+        try:
+            return self.__webpage.xpath("//meta[@itemprop='datePublished']/@content")[0]
+
+        except Exception as e:
+            raise Exception(
+                f"Failed to scrape publication date for ID: {self.__id}\n"
+                f"Reason: {e}"
+            )
+
     __DOMAIN: str = "https://readmoo.com"
 
     @classmethod
