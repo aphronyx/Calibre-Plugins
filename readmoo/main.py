@@ -193,6 +193,28 @@ class Book:
                 f"Failed to scrape series for ID: {self.__id}\n" f"Reason: {e}"
             )
 
+    @property
+    def description(self) -> str:
+        try:
+            desc_div = self.__webpage.xpath("//div[@class='book-description']")[0]
+            desc = _get_inner_html(desc_div).strip()
+
+            detail_desc_div = self.__webpage.xpath(
+                "//div[@id='book-detail-description']"
+            )[0]
+            detail_desc = (
+                _get_inner_html(detail_desc_div)
+                .replace(r"""<i class="mo mo-bookinfo"></i> """, "")
+                .strip()
+            )
+
+            return f"{desc}\n<hr>\n{detail_desc}"
+
+        except Exception as e:
+            raise Exception(
+                f"Failed to scrape description for ID: {self.__id}\n" f"Reason: {e}"
+            )
+
     __DOMAIN: str = "https://readmoo.com"
 
     @classmethod
@@ -204,3 +226,9 @@ class Book:
         timeout: int | None = None,
     ) -> None:
         results.append((index, cls(id, timeout)))
+
+
+def _get_inner_html(element) -> str:
+    return (element.text or "") + "".join(
+        str(html.tostring(child, encoding="unicode")) for child in element
+    )

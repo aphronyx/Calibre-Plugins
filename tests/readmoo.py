@@ -129,3 +129,9 @@ class TestBook(TestCase):
 
     def test_no_series(self) -> None:
         self.assertIsNone(Book("210305007000101").series)
+
+    def test_description(self) -> None:
+        desc = Book("210305007000101").description
+
+        self.assertTrue("採訪三十位幕僚、政務官、社會運動者等政策相關人士" in desc)
+        self.assertTrue("這八年，是民主臺灣的「大規劃時代」" in desc)
